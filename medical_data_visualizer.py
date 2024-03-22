@@ -10,10 +10,11 @@ df = pd.read_csv('medical_examination.csv')
 def BMI_calc(height, weight):
     height_conv = height / 100
     body_BMI = weight/ (height_conv ** 2)
-    BMI = [x for x in body_BMI if ]
+    BMI = [x for x in body_BMI if body_BMI > 25]
+    return BMI 
 
-
-df['overweight'] = None
+overweight = BMI_calc(df['Height'], df['Weight'])
+df['overweight'] = df['Height']['Weight'].apply(lamda x: 1 if in BMI else 0 )
 
 # Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
 
