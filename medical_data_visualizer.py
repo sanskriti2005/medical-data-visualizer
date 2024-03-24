@@ -23,6 +23,9 @@ df['gluc'] = df['gluc'].apply(lambda x: 0 if x == 1 else 1)
 # Draw Categorical Plot
 def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
+    value = ['cholesterol', 'gluc','smoke', 'alco','active','overweight']
+    df_long = pd.melt(df, value_vars = value, var_name='variable', value_name='value')
+    
     df_cat = None
 
 
