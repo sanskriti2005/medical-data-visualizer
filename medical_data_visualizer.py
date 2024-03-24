@@ -24,21 +24,18 @@ df['gluc'] = df['gluc'].apply(lambda x: 0 if x == 1 else 1)
 def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
     value = ['cholesterol', 'gluc','smoke', 'alco','active','overweight']
-    df_long = pd.melt(df, value_vars = value, var_name='variable', value_name='value')
-    df_cat = sns.catplot(x = 'variable', hue='value', col='cardio', data = df_long, kind = 'count')
+    df_long = pd.melt(df, id_vars = 'cardio', value_vars = value, var_name='variable', value_name='value')
 
 
-    # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.
-    df_cat = None
+    # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.)
     
 
     # Draw the catplot with 'sns.catplot()'
 
-
+    df_cat = sns.catplot(x = 'variable', hue='value', col='cardio', data = df_long, kind = 'count')
 
     # Get the figure for the output
-    fig = None
-
+    fig = df_cat.fig
 
     # Do not modify the next two lines
     fig.savefig('catplot.png')
