@@ -25,8 +25,7 @@ def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
     value = ['cholesterol', 'gluc','smoke', 'alco','active','overweight']
     df_long = pd.melt(df, value_vars = value, var_name='variable', value_name='value')
-    
-    df_cat = None
+    df_cat = sns.catplot(x = 'cardio', data = df_long, kind = 'Bar')
 
 
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.
