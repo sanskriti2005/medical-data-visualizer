@@ -28,11 +28,11 @@ def draw_cat_plot():
 
 
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.)
-    
+    df_grouped = df_long.groupby(['cardio', 'variable', 'value']).size().reset_index(name='total')
 
     # Draw the catplot with 'sns.catplot()'
-
-    df_cat = sns.catplot(x = 'variable', hue='value', col='cardio', data = df_long, kind = 'count')
+    df_cat = sns.catplot(x = 'variable', hue='value', col='cardio', data = df_grouped, kind = 'count')
+    df_cat.set_ylabels('total')
 
     # Get the figure for the output
     fig = df_cat.fig
