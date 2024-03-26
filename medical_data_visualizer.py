@@ -65,7 +65,7 @@ def draw_heat_map():
     df_heat = df_cleanedrows3
 
     # Calculate the correlation matrix
-    corr = None
+    corr = df_heat.corr()
 
     # Generate a mask for the upper triangle
     mask = None
