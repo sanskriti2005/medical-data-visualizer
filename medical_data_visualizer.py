@@ -7,13 +7,19 @@ import numpy as np
 df = pd.read_csv('medical_examination.csv')
 
 # Add 'overweight' column
+    #made a function to calculate the BMI
 def BMI_calc(height, weight):
     height_conv = height / 100
     BMI = weight/ (height_conv ** 2)
     return BMI 
 
+    #using the BMI_calc function, a column for the BMI is added to the dataframe
 df['BMI']= df.apply(lambda row: BMI_calc(row['height'], row['weight']), axis = 1)
+
+    # the BMI column is used to create the overweight column with binary values
 df['overweight'] = df['BMI'].apply(lambda x: 1 if x > 25 else 0 )
+
+    # the BMI column is then dropped from the dataframe
 df.drop(['BMI'], axis = 1, inplace = True)
 
 # Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
@@ -31,9 +37,9 @@ def draw_cat_plot():
     df_grouped = df_long.groupby(['cardio','variable','value']).size().reset_index(name='total')
 
     # Draw the catplot with 'sns.catplot()'
-
     df_cat = sns.catplot(x = 'variable', hue='value', col='cardio', data = df_long, kind = 'count')
     df_cat.set_ylabels('total')
+
     # Get the figure for the output
     fig = df_cat.fig
 
@@ -68,9 +74,7 @@ def draw_heat_map():
     corr = df_heat.corr()
 
     # Generate a mask for the upper triangle
-    mask = None
-
-
+    mask = np.triu(corr)
 
     # Set up the matplotlib figure
     fig, ax = None
