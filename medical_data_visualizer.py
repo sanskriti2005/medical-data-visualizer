@@ -52,7 +52,7 @@ def draw_cat_plot():
 def draw_heat_map():
     # Clean the data
         #cleaned rows where the dystolic pressure is higher than the systolic pressure
-    df_cleanedrows1 = df[df[ap_lo] <= df['ap_hi']]
+    df_cleanedrows1 = df[df['ap_lo'] <= df['ap_hi']]
 
 
         #calculating the quantiles for the 'height' column
@@ -77,10 +77,10 @@ def draw_heat_map():
     mask = np.triu(corr)
 
     # Set up the matplotlib figure
-    fig, ax = None
+    fig, ax = plt.subplots(figsize=(10,8))
 
     # Draw the heatmap with 'sns.heatmap()'
-
+    sns.heatmap(corr)
 
 
     # Do not modify the next two lines
