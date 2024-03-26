@@ -45,7 +45,24 @@ def draw_cat_plot():
 # Draw Heat Map
 def draw_heat_map():
     # Clean the data
-    df_heat = None
+        #cleaned rows where the dystolic pressure is higher than the systolic pressure
+    df_cleanedrows1 = df[df[ap_lo] <= df['ap_hi']]
+
+
+        #calculating the quantiles for the 'height' column
+    height_2_5 = df['height'].quantile(0.025)
+    height_97_5 = df['height'].quantile(0.975)
+        #cleaning the data that is incorrect from the 'height' column
+    df_cleanedrows2 = df_cleanedrows1[(df_cleanedrows1['height'] >= height_2_5) & (df_cleanedrows1['height'] <= height_97_5)]
+
+        #calculating the quantiles for the 'weight' column
+    weight_2_5 = df['weight'].quantile(0.025)
+    weight_97_5 = df['weight'].quantile(0.975)
+        #cleaning the data that is incorrect from the 'weight' column
+    df_cleanedrows3 = df_cleanedrows2[(df_cleanedrows2['weight'] >= weight_2_5) & (df_cleanedrows2['weight'] <= weight_97_5)]
+
+
+    df_heat = df_cleanedrows3
 
     # Calculate the correlation matrix
     corr = None
