@@ -54,7 +54,6 @@ def draw_heat_map():
         #cleaned rows where the dystolic pressure is higher than the systolic pressure
     df_cleanedrows1 = df[df['ap_lo'] <= df['ap_hi']]
 
-
         #calculating the quantiles for the 'height' column
     height_2_5 = df['height'].quantile(0.025)
     height_97_5 = df['height'].quantile(0.975)
@@ -80,7 +79,7 @@ def draw_heat_map():
     fig, ax = plt.subplots(figsize=(10,8))
 
     # Draw the heatmap with 'sns.heatmap()'
-    sns.heatmap(corr)
+    sns.heatmap(corr, mask=mask, annot=True, fmt=".1f", cbar=True)
 
 
     # Do not modify the next two lines
